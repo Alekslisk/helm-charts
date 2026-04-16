@@ -1,0 +1,27 @@
+# Посмотреть все ресурсы, созданные релизом
+kubectl get all -l app.kubernetes.io/instance=myapp-release
+
+# Посмотреть конкретные типы ресурсов
+kubectl get deploy,svc,networkpolicy,role,rolebinding,sa -l app.kubernetes.io/instance=myapp-release
+
+# Детальный просмотр Deployment
+kubectl describe deployment myapp-release-helm-chart
+
+# Проверить, что поды запущены
+kubectl get pods -l app.kubernetes.io/instance=myapp-release
+
+# Посмотреть логи конкретного пода (если есть)
+kubectl logs deployment/myapp-release-helm-chart
+
+# Получить назначенный NodePort
+kubectl get svc myapp-release-helm-chart
+
+# Пример вывода:
+# NAME                         TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+# myapp-release-helm-chart     NodePort   10.96.100.100   <none>        8080:30080/TCP   1m
+
+# Minikube
+minikube service myapp-release-helm-chart --url
+
+# Kind (если нет LoadBalancer) — можно использовать port-forward
+kubectl port-forward service/myapp-release-helm-chart 8080:8080

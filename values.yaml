@@ -1,0 +1,26 @@
+replicaCount: 2
+
+image:
+  repository: nginx
+  tag: stable
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+networkPolicy:
+  enabled: true
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: frontend
+
+rbac:
+  create: true
+  roleName: pod-reader
+
+serviceAccount:
+  create: true
+  name: ""

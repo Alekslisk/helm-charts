@@ -1,0 +1,19 @@
+# Создать скелет чарта
+helm create myapp-chart
+
+# Линтинг (проверка синтаксиса)
+helm lint ./helm-chart
+
+# Просмотр сгенерированных манифестов (dry-run)
+helm install --dry-run --debug myapp-release ./helm-chart
+
+# Установка чарта
+helm install myapp-release ./helm-chart --namespace default
+
+# Обновление релиза с новыми values
+helm upgrade myapp-release ./helm-chart --values custom-values.yaml
+
+helm upgrade myapp-release ./helm-chart --set networkPolicy.enabled=true
+
+# Удаление релиза
+helm uninstall myapp-release
