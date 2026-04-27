@@ -25,11 +25,11 @@ entries:
       category: Database
       images: |
         - name: os-shell
-          image: docker.io/bitnami/os-shell:11-debian-11-r77
+          image: docker.io/bitnami/os-shell:11
         - name: postgres-exporter
-          image: docker.io/bitnami/postgres-exporter:0.14.0-debian-11-r2
+          image: docker.io/bitnami/postgres-exporter:0.14.0
         - name: postgresql
-          image: docker.io/bitnami/postgresql:15.4.0-debian-11-r45
+          image: docker.io/bitnami/postgresql:15.4.0
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 15.4.0
@@ -67,13 +67,13 @@ entries:
       category: Database
       images: |
         - name: os-shell
-          image: docker.io/bitnami/os-shell:11-debian-11-r92
+          image: docker.io/bitnami/os-shell:11
         - name: redis-exporter
-          image: docker.io/bitnami/redis-exporter:1.55.0-debian-11-r3
+          image: docker.io/bitnami/redis-exporter:1.55.0
         - name: redis-sentinel
-          image: docker.io/bitnami/redis-sentinel:7.2.3-debian-11-r2
+          image: docker.io/bitnami/redis-sentinel:7.2.3
         - name: redis
-          image: docker.io/bitnami/redis:7.2.3-debian-11-r2
+          image: docker.io/bitnami/redis:7.2.3
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.2.3
