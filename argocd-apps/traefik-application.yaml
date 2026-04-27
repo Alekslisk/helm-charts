@@ -1,32 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: traefik-ingress
+  name: my-app-deploy
   namespace: argocd
 spec:
   project: default
-  sources:
-    # Источник 1: Официальный Helm-чарт Traefik
-    - repoURL: https://traefik.github.io/charts
-      chart: traefik
-      targetRevision: 34.0.0
-      # Блок helm должен быть здесь, привязанный к самому чарту!
-      helm:
-        valueFiles:
-          - $my-values-repo/infra/traefik/values.yaml
-    
-    # Источник 2: ВАШ Git-репозиторий
-    - repoURL: https://github.com/Alekslisk/helm-charts.git
-      targetRevision: HEAD
-      ref: my-values-repo
-
+  source:
+    repoURL: https://github.com/Alekslisk/helm-charts.git
+    targetRevision: main
+    path: charts/myapp # <--- ВОТ ЧТО НУЖНО БЫЛО ИЗМЕНИТЬ
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: traefik
-
+    namespace: default
   syncPolicy:
-    automated:
+    automated: 
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
