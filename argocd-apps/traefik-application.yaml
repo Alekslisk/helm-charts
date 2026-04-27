@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik-ingress
+  namespace: argocd
+spec:
+  project: default
+  # Блок с несколькими источниками
+  sources:
+    # Источник 1: Официальный Helm-чарт Traefik
+    - repoURL: https://traefik.github.io/charts
+      chart: traefik
+      targetRevision: 34.0.0
+    
+    # Источник 2: ВАШ Git-репозиторий
+    - repoURL: https://github.com/Alekslisk/helm-charts.git
+      targetRevision: HEAD
+      ref: my-values-repo
+
+  destination:
+    server: https://kubernetes.default.svc
+    # Указываем, что Traefik должен жить в своем собственном namespace
+    namespace: traefik
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      # ArgoCD сам создаст namespace 'traefik' перед деплоем
+      - CreateNamespace=true
+    helm:
+      valueFiles:
+        # Указываем путь к вашему values.yaml, используя алиас репозитория
+        - $my-values-repo/infra/traefik/values.yaml

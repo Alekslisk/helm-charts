@@ -1,0 +1,25 @@
+# Делаем Traefik Ingress-контроллером по умолчанию в кластере
+ingressClass:
+  enabled: true
+  isDefaultClass: true
+
+# Настройка типа сервиса. LoadBalancer работает отлично, 
+# если в вашем кластере есть балансировщик (например, Klipper в K3s).
+service:
+  type: LoadBalancer
+
+# Включаем встроенную панель управления (Dashboard) для удобства отладки
+dashboard:
+  enabled: true
+  domain: "traefik.local"
+
+# Настройки портов (базовые 80 и 443)
+ports:
+  web:
+    port: 8000
+    expose: true
+    exposedPort: 80
+  websecure:
+    port: 8443
+    expose: true
+    exposedPort: 443
