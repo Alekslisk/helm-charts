@@ -18,11 +18,11 @@ networkPolicy:
               app: frontend
 
 rbac:
-  create: true
+  create: false
   roleName: pod-reader
 
 serviceAccount:
-  create: true
+  create: false
   name: ""
 
 postgresql:
