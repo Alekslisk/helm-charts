@@ -24,3 +24,11 @@ rbac:
 serviceAccount:
   create: true
   name: ""
+
+postgresql:
+  image:
+    tag: "15.4.0"
+
+redis:
+  image:
+    tag: "7.2.3"
